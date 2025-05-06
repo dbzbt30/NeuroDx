@@ -34,3 +34,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+For non-technical users to add new diseases:
+Open src/lib/diseaseDatabase.ts
+Find the DISEASES array
+Copy the template from the top comments
+Paste it in the array
+Fill in your disease details
+Important: For the findings array, use IDs that exactly match those in src/lib/findings.ts
+Set appropriate likelihood ratios:
+lrPositive > 1 (how much more likely when present)
+lrNegative < 1 (how much less likely when absent)
+Use the LR constants for common values

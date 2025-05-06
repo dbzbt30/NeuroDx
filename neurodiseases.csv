@@ -1,0 +1,133 @@
+﻿#,disease / syndrome,primary lesion_site
+Cerebral Cortex / Subcortical White Matter,,
+ 1,Acute ischemic stroke – MCA territory,cortex
+ 2,Acute ischemic stroke – ACA territory,cortex
+ 3,Acute ischemic stroke – PCA territory,cortex
+ 4,Watershed infarction,cortex
+ 5,Lobar intracerebral haemorrhage,cortex
+ 6,Epidural haematoma,cortex
+ 7,Acute / chronic subdural haematoma,cortex
+ 8,Subarachnoid haemorrhage (ruptured aneurysm),cortex
+ 9,Cerebral venous sinus thrombosis,cortex
+ 10,Brain abscess (supratentorial),cortex
+ 11,Glioblastoma / high‑grade glioma,cortex
+ 12,Meningioma (convexity / parasagittal),cortex
+ 13,Cerebral metastasis,cortex
+ 14,Herpes simplex encephalitis,cortex
+ 15,"Auto‑immune limbic encephalitis (anti‑NMDA, LGI1)",cortex
+ 16,Posterior reversible encephalopathy (PRES),cortex
+ 17,Epileptogenic cortical dysplasia / mesial temporal sclerosis,cortex
+ 18,Primary angiitis of CNS (PACNS),cortex
+Basal Ganglia / Thalamus,,
+ 19,Thalamic stroke (posterior / paramedian),basal ganglia / thalamus
+ 20,Putaminal haemorrhage,basal ganglia
+ 21,Parkinson disease,basal ganglia
+ 22,Multiple system atrophy – parkinsonian type (MSA‑P),basal ganglia
+ 23,Progressive supranuclear palsy (PSP),basal ganglia + midbrain
+ 24,Corticobasal degeneration (CBD),cortex + basal ganglia
+ 25,Huntington disease,basal ganglia
+ 26,Wilson disease,basal ganglia
+ 27,Sydenham chorea,basal ganglia
+Brainstem (Midbrain → Medulla),,
+ 28,"Midbrain infarct (Weber, Claude, Benedikt)",brainstem
+ 29,Pons infarct / locked‑in syndrome,brainstem
+ 30,Lateral medullary (Wallenberg) syndrome,brainstem
+ 31,Medial medullary syndrome,brainstem
+ 32,Pontine haemorrhage,brainstem
+ 33,Brainstem cavernous malformation,brainstem
+ 34,Brainstem glioma / metastasis,brainstem
+ 35,Central pontine myelinolysis,brainstem
+ 36,Multiple sclerosis – brainstem plaque,brainstem
+ 37,Wernicke encephalopathy,brainstem + cerebellum
+ 38,Dolicho‑ectatic basilar artery compression,brainstem
+Cerebellum,,
+ 39,"Cerebellar infarct (PICA, AICA, SCA)",cerebellum
+ 40,Cerebellar haemorrhage,cerebellum
+ 41,Post‑infectious / paraneoplastic cerebellitis,cerebellum
+ 42,Hemangioblastoma / cerebellar tumour (adult),cerebellum
+ 43,Medulloblastoma (adult variant),cerebellum
+ 44,"Spinocerebellar ataxias (SCA 1‑7, etc.)",cerebellum
+ 45,Alcoholic cerebellar degeneration,cerebellum
+ 46,Multiple system atrophy – cerebellar type (MSA‑C),cerebellum
+Spinal Cord (Myelopathy),,
+ 47,Cervical spondylotic myelopathy,spinal cord
+ 48,Thoracic / lumbar disc herniation myelopathy,spinal cord
+ 49,"Traumatic spinal cord injury (central cord, Brown‑Séquard)",spinal cord
+ 50,Spinal epidural abscess,spinal cord
+ 51,Spinal epidural haematoma,spinal cord
+ 52,Metastatic spinal cord compression,spinal cord
+ 53,"Intramedullary tumour (ependymoma, astrocytoma)",spinal cord
+ 54,"Intradural extramedullary tumour (meningioma, schwannoma)",spinal cord
+ 55,"Transverse myelitis (idiopathic, post‑infectious)",spinal cord
+ 56,Neuromyelitis optica spectrum disorder,spinal cord
+ 57,Multiple sclerosis – spinal plaque,spinal cord
+ 58,Anterior spinal artery syndrome,spinal cord
+ 59,Subacute combined degeneration (vit B12 deficiency),spinal cord  (dorsal + lateral columns)
+ 60,Syringomyelia / syringobulbia,spinal cord
+Anterior Horn Cell,,
+ 61,Amyotrophic lateral sclerosis (ALS),anterior horn cell
+ 62,Adult spinal muscular atrophy,anterior horn cell
+ 63,Poliomyelitis (post‑polio),anterior horn cell
+ 64,West Nile virus myelitis,anterior horn cell
+Peripheral Nerve – Radiculopathy / Plexopathy,,
+ 65,Cervical radiculopathy (C5‑8),nerve root
+ 66,Lumbar radiculopathy (L4‑S1),nerve root
+ 67,Cauda equina syndrome,nerve root
+ 68,Conus medullaris syndrome,spinal cord / root
+ 69,Brachial plexopathy (Parsonage‑Turner),plexus
+ 70,Diabetic lumbosacral plexopathy,plexus
+ 71,Radiation plexopathy,plexus
+ 72,Tumour‑infiltrative plexopathy,plexus
+Peripheral Nerve – Mononeuropathy,,
+ 73,Carpal tunnel syndrome (median),peripheral nerve
+ 74,Ulnar neuropathy at elbow,peripheral nerve
+ 75,Radial neuropathy (“Saturday‑night palsy”),peripheral nerve
+ 76,Peroneal neuropathy at fibular head,peripheral nerve
+ 77,Lateral femoral cutaneous neuropathy (meralgia),peripheral nerve
+ 78,Common femoral neuropathy,peripheral nerve
+ 79,Axillary neuropathy,peripheral nerve
+ 80,Long thoracic neuropathy,peripheral nerve
+ 81,Cranial nerve III palsy (micro‑vascular vs compressive),cranial nerve
+ 82,Cranial nerve VI palsy,cranial nerve
+ 83,Bell palsy (CN VII),cranial nerve
+ 84,Ramsay‑Hunt syndrome (CN VII),cranial nerve
+ 85,Trigeminal neuralgia (CN V),cranial nerve
+ 86,Glossopharyngeal neuralgia (CN IX),cranial nerve
+Peripheral Nerve – Polyneuropathy,,
+ 87,Guillain‑Barré syndrome (AIDP),polyneuropathy
+ 88,Chronic inflammatory demyelinating polyradiculoneuropathy (CIDP),polyneuropathy
+ 89,Diabetic sensorimotor polyneuropathy,polyneuropathy
+ 90,Alcoholic polyneuropathy,polyneuropathy
+ 91,"Chemotherapy‑induced neuropathy (e.g., vincristine)",polyneuropathy
+ 92,Vasculitic neuropathy,polyneuropathy
+ 93,"Hereditary motor‑sensory neuropathy (CMT 1A, 2)",polyneuropathy
+ 94,Amyloid (ATTR) neuropathy,polyneuropathy
+ 95,Small‑fibre neuropathy,polyneuropathy
+Neuromuscular Junction,,
+ 96,Myasthenia gravis,neuromuscular junction
+ 97,Lambert‑Eaton myasthenic syndrome,neuromuscular junction
+ 98,Botulism,neuromuscular junction
+ 99,Organophosphate toxicity,neuromuscular junction
+ 100,Congenital myasthenic syndromes,neuromuscular junction
+Muscle (Myopathy),,
+ 101,Polymyositis,muscle
+ 102,Dermatomyositis,muscle
+ 103,Inclusion body myositis,muscle
+ 104,Immune‑mediated necrotising myopathy (statin‑related),muscle
+ 105,Duchenne muscular dystrophy (adult survivor),muscle
+ 106,Becker muscular dystrophy,muscle
+ 107,Limb‑girdle muscular dystrophies,muscle
+ 108,Facioscapulohumeral dystrophy,muscle
+ 109,Myotonic dystrophy type 1,muscle
+ 110,McArdle disease (glycogen storage),muscle
+ 111,CPT II deficiency (fatty‑acid oxidation),muscle
+ 112,Endocrine myopathy – hyperthyroid,muscle
+ 113,Endocrine myopathy – hypothyroid,muscle
+ 114,Alcoholic myopathy,muscle
+ 115,Rhabdomyolysis (toxic / exertional),muscle
+ 116,Hypokalaemic periodic paralysis,muscle
+ 117,Hyperkalaemic periodic paralysis,muscle
+Autonomic Nervous System,,
+ 118,Multiple system atrophy – autonomic,autonomic
+ 119,Pure autonomic failure,autonomic
+ 120,Diabetic autonomic neuropathy,autonomic

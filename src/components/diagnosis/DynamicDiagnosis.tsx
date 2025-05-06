@@ -9,6 +9,18 @@ interface DynamicDiagnosisProps {
 const DynamicDiagnosis: React.FC<DynamicDiagnosisProps> = ({ findings }) => {
   const diagnosis = useMemo(() => calculateDiagnosis(findings), [findings]);
 
+  const getConfidenceColor = (confidence: number) => {
+    if (confidence >= 0.8) return 'text-green-600';
+    if (confidence >= 0.5) return 'text-yellow-600';
+    return 'text-red-600';
+  };
+
+  const getProbabilityColor = (probability: number) => {
+    if (probability >= 0.7) return 'bg-green-600';
+    if (probability >= 0.4) return 'bg-yellow-600';
+    return 'bg-blue-600';
+  };
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -18,15 +30,36 @@ const DynamicDiagnosis: React.FC<DynamicDiagnosisProps> = ({ findings }) => {
         </p>
       </div>
 
-      {/* Lesion Localization */}
+      {/* Confidence Indicator */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-lg shadow-sm p-6"
+        className="bg-white rounded-lg shadow-sm p-4"
       >
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Lesion Localization</h3>
-        <div className="p-4 bg-blue-50 rounded-lg">
-          <div className="font-medium text-blue-900">{diagnosis.lesionSite}</div>
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-medium text-gray-900">Diagnostic Confidence</h3>
+          <div className={`text-lg font-bold ${getConfidenceColor(diagnosis.confidence)}`}>
+            {Math.round(diagnosis.confidence * 100)}%
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Lesion Sites */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-white rounded-lg shadow-sm p-4"
+      >
+        <h3 className="text-lg font-medium text-gray-900 mb-2">Likely Lesion Sites</h3>
+        <div className="flex flex-wrap gap-2">
+          {diagnosis.lesionSite.map((site) => (
+            <span
+              key={site}
+              className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+            >
+              {site}
+            </span>
+          ))}
         </div>
       </motion.div>
 
@@ -35,36 +68,18 @@ const DynamicDiagnosis: React.FC<DynamicDiagnosisProps> = ({ findings }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-red-50 rounded-lg p-4"
+          className="bg-white rounded-lg shadow-sm p-4"
         >
-          <div className="flex items-start">
-            <div className="flex-shrink-0">
-              <svg
-                className="h-6 w-6 text-red-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+          <h3 className="text-lg font-medium text-red-600 mb-2">Red Flags</h3>
+          <div className="flex flex-wrap gap-2">
+            {diagnosis.redFlags.map((flag) => (
+              <span
+                key={flag}
+                className="px-3 py-1 bg-red-50 text-red-700 rounded-full text-sm"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <h3 className="text-sm font-medium text-red-800">
-                Red Flags Detected
-              </h3>
-              <div className="mt-2 text-sm text-red-700">
-                <ul className="list-disc pl-5 space-y-1">
-                  {diagnosis.redFlags.map((flag, index) => (
-                    <li key={index}>{flag}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+                {flag}
+              </span>
+            ))}
           </div>
         </motion.div>
       )}
@@ -85,7 +100,7 @@ const DynamicDiagnosis: React.FC<DynamicDiagnosisProps> = ({ findings }) => {
               </div>
               <div className="relative h-2 bg-gray-200 rounded-full overflow-hidden">
                 <div
-                  className="absolute top-0 left-0 h-full bg-blue-600 transition-all duration-500"
+                  className={`absolute top-0 left-0 h-full transition-all duration-500 ${getProbabilityColor(disease.posteriorProbability)}`}
                   style={{ width: `${disease.posteriorProbability * 100}%` }}
                 />
               </div>
