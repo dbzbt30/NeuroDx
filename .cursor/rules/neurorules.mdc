@@ -1,0 +1,98 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# ─────────────────────────────────────────────────────────────
+# Cursor Rules – NeuroLocal (Neurological Lesion‑Localization PWA)
+# Owner: NeuroUX · Last updated: {{TODAY}}
+# Purpose: Guide Cursor’s AI‑driven code generation so it writes
+#          clean, test‑covered, HIPAA/PIPEDA‑ready code that matches
+#          the product requirements (PRD.md).
+# ─────────────────────────────────────────────────────────────
+
+## 0. PRIME DIRECTIVES
+1. **Respect the PRD** in `/docs/PRD.md` and architectural choices in Section E.  
+2. **Single‑responsibility, small modules**: If a file > 250 LoC, split it.  
+3. **Strict TypeScript** (`"strict": true` in `tsconfig.json`).  
+4. **Write or update tests** *every time* a functional line is added.  
+5. **No silent breaking changes**: update interfaces & tests together.
+
+## 1. TECH STACK (DON’T DEVIATE)
+Frontend    : React 18 + Vite + TailwindCSS + Zustand  
+Backend     : Node 20 + Fastify + Zod schemas + PostgreSQL  
+State/Cache : Dexie (IndexedDB) for offline; use Service Worker for PWA  
+Testing     : Jest + React Testing Library; Playwright for E2E  
+CI/CD       : GitHub Actions → Fly.io (Docker build)  
+Lint/Format : ESLint (Airbnb + Prettier) – auto‑fix before commit
+
+## 2. PROJECT STRUCTURE
+/src
+/components # Reusable UI (≥44 px touch targets)
+/features # Feature folders e.g., exam-step/
+/lib # Shared utils (bayes.ts, lrLookup.ts)
+/store # Zustand slices
+/types # Global TS types & Zod schemas
+/assets # SVGs, icons
+/server
+/routes # Fastify route files
+/models # DB models (knex or prisma)
+/services # Business logic (no SQL here)
+
+
+## 3. CODING GUIDELINES
+- **Functional Components + Hooks** only.  
+- Use Tailwind utility classes; *no inline styles*.  
+- Prefer **async/await**; never mix with `.then()` chains in same fn.  
+- All API calls wrapped in `/lib/apiClient.ts`; error‑handled with retry (expo back‑off).  
+- Accessibility: every interactive element has `aria-*` labels; color palette passes WCAG 2.1 AA, including color‑blind‑safe chips.
+
+## 4. BAYES ENGINE
+- Core util lives in `/lib/bayes.ts`; must expose `updatePosterior(prior, LR_pos, LR_neg, present) → posterior`.  
+- Likelihood‑ratio table lives in `db.findings`; seed via `/server/seeds/seed_findings.ts`.  
+- When adding new finding/disease, update CSV seed + JSON fixtures for unit tests.
+
+## 5. API CONTRACTS
+- Contracts defined in `/server/routes/openapi.yaml`; use **OpenAPI 3.1**.  
+- Validate all request/response bodies with Zod → Fastify type provider.  
+- Every breaking change bumps minor version in path `/v{n}`.
+
+## 6. TESTING RULES
+- **Coverage ≥ 90 %** lines for `/lib` and `/server` folders.  
+- Playwright scripts live in `/e2e`; mock network with MSW when offline tests required.  
+- For each reported bug, first add a failing test, then fix.
+
+## 7. GIT WORKFLOW
+1. Create branch `feat/<topic>` or `fix/<bug>` from `main`.  
+2. Small commits; conventional messages (`feat: add HINTS logic`).  
+3. PR must pass `pnpm test` + `pnpm lint` + E2E before merge.  
+4. Squash & merge; delete branch.
+
+## 8. SECURITY & PRIVACY
+- Never log PHI; use `logger.debug()` with request IDs only.  
+- Encrypt any cached session with AES‑GCM (`crypto.subtle`).  
+- Follow OWASP Top‑10; Fastify helmet plugin on by default.
+
+## 9. FORBIDDEN
+- No CSS frameworks besides Tailwind.  
+- No deprecated React APIs (`UNSAFE_` methods).  
+- No direct SQL in route handlers.  
+- No `.env` secrets committed.  
+- No non‑standard JS proposal libs.
+
+## 10. DOCUMENTATION & DX
+- Generate TypeDoc on `pnpm docs`.  
+- Each exported function/module needs JSDoc with examples.  
+- Provide usage snippets in README for all CLI scripts.
+
+## 11. DONE DEFINITION
+A PR is “done” when:
+1. Code + tests + docs updated.  
+2. CI passes.  
+3. Preview deploy link posted in PR description.  
+4. Reviewer checklist (in `.github/PULL_REQUEST_TEMPLATE.md`) is satisfied.
+
+# ─────────────────────────────────────────────────────────────
+# End of Cursor Rules
+# ─────────────────────────────────────────────────────────────
+
