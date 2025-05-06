@@ -1,103 +1,110 @@
-import Image from "next/image";
+'use client';
+
+import React, { useState, useEffect, useMemo } from 'react';
+import ExamShell from '@/components/exam-flow/ExamShell';
+import QuickTriageSheet from '@/components/exam-flow/QuickTriageSheet';
+import CranialNervesGrid from '@/components/exam-flow/CranialNervesGrid';
+import MotorExam from '@/components/exam-flow/MotorExam';
+import SensoryExam from '@/components/exam-flow/SensoryExam';
+import ReflexesExam from '@/components/exam-flow/ReflexesExam';
+import DynamicDiagnosis from '@/components/diagnosis/DynamicDiagnosis';
+import { Finding, Disease, calculateDiagnosis } from '@/lib/diagnosis';
+
+interface ExamState {
+  findings: Finding[];
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [currentStep, setCurrentStep] = useState(1);
+  const [examState, setExamState] = useState<ExamState>({
+    findings: []
+  });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const allFindings = useMemo(() => examState.findings, [examState.findings]);
+
+  useEffect(() => {
+    const diagnosis = calculateDiagnosis(allFindings);
+    // You can use the diagnosis for further processing if needed
+  }, [allFindings]);
+
+  const handleTriageComplete = (findings: Finding[]) => {
+    setExamState(prev => ({
+      ...prev,
+      findings: [...prev.findings, ...findings]
+    }));
+    setCurrentStep(2);
+  };
+
+  const handleCranialNervesComplete = (findings: Finding[]) => {
+    setExamState(prev => ({
+      ...prev,
+      findings: [...prev.findings, ...findings]
+    }));
+    setCurrentStep(3);
+  };
+
+  const handleMotorExamComplete = (findings: Finding[]) => {
+    setExamState(prev => ({
+      ...prev,
+      findings: [...prev.findings, ...findings]
+    }));
+    setCurrentStep(4);
+  };
+
+  const handleSensoryExamComplete = (findings: Finding[]) => {
+    setExamState(prev => ({
+      ...prev,
+      findings: [...prev.findings, ...findings]
+    }));
+    setCurrentStep(5);
+  };
+
+  const handleReflexesExamComplete = (findings: Finding[]) => {
+    setExamState(prev => ({
+      ...prev,
+      findings: [...prev.findings, ...findings]
+    }));
+    setCurrentStep(6);
+  };
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <QuickTriageSheet onComplete={handleTriageComplete} />;
+      case 2:
+        return <CranialNervesGrid onComplete={handleCranialNervesComplete} />;
+      case 3:
+        return <MotorExam onComplete={handleMotorExamComplete} />;
+      case 4:
+        return <SensoryExam onComplete={handleSensoryExamComplete} />;
+      case 5:
+        return <ReflexesExam onComplete={handleReflexesExamComplete} />;
+      case 6:
+        return (
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900">Examination Complete</h2>
+            <p className="mt-2 text-gray-600">
+              Review the findings and differential diagnosis below
+            </p>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <ExamShell currentStep={currentStep}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            {renderStep()}
+          </div>
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <DynamicDiagnosis findings={allFindings} />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </ExamShell>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 # ─────────────────────────────────────────────────────────────
 # Cursor Rules – NeuroLocal (Neurological Lesion‑Localization PWA)
@@ -18,13 +18,6 @@ alwaysApply: false
 4. **Write or update tests** *every time* a functional line is added.  
 5. **No silent breaking changes**: update interfaces & tests together.
 
-## 1. TECH STACK (DON’T DEVIATE)
-Frontend    : React 18 + Vite + TailwindCSS + Zustand  
-Backend     : Node 20 + Fastify + Zod schemas + PostgreSQL  
-State/Cache : Dexie (IndexedDB) for offline; use Service Worker for PWA  
-Testing     : Jest + React Testing Library; Playwright for E2E  
-CI/CD       : GitHub Actions → Fly.io (Docker build)  
-Lint/Format : ESLint (Airbnb + Prettier) – auto‑fix before commit
 
 ## 2. PROJECT STRUCTURE
 /src
@@ -51,11 +44,6 @@ Lint/Format : ESLint (Airbnb + Prettier) – auto‑fix before commit
 - Core util lives in `/lib/bayes.ts`; must expose `updatePosterior(prior, LR_pos, LR_neg, present) → posterior`.  
 - Likelihood‑ratio table lives in `db.findings`; seed via `/server/seeds/seed_findings.ts`.  
 - When adding new finding/disease, update CSV seed + JSON fixtures for unit tests.
-
-## 5. API CONTRACTS
-- Contracts defined in `/server/routes/openapi.yaml`; use **OpenAPI 3.1**.  
-- Validate all request/response bodies with Zod → Fastify type provider.  
-- Every breaking change bumps minor version in path `/v{n}`.
 
 ## 6. TESTING RULES
 - **Coverage ≥ 90 %** lines for `/lib` and `/server` folders.  
